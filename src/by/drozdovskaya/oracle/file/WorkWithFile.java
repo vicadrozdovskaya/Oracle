@@ -13,10 +13,9 @@ public class WorkWithFile {
 
 	public List<String> readFromFile(String type) throws IOException {
 		System.out.println(RELATIVE_LOCATION_FILE + type + ".txt");
-		List<String> lines = Files.readAllLines(Paths.get(RELATIVE_LOCATION_FILE + type + ".txt"), StandardCharsets.UTF_8);
+		List<String> lines = Files.readAllLines(Paths.get(RELATIVE_LOCATION_FILE + type + ".txt"),
+				StandardCharsets.UTF_8);
 		return lines;
 	}
-	
-
 
 }

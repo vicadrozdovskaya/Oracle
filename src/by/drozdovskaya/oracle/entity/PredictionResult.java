@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PredictionResult {
-	
-	private Map <Prediction, Answer> mapOfPredictionResult;
-	
+
+	private Map<Prediction, Answer> mapOfPredictionResult;
+
 	public PredictionResult() {
-		
+
 		this.mapOfPredictionResult = new HashMap<>();
 	}
-	
-	public void setPredictionResult (Prediction prediction, Answer answer ) {
+
+	public void setPredictionResult(Prediction prediction, Answer answer) {
 		this.mapOfPredictionResult.put(prediction, answer);
 	}
 
@@ -28,7 +28,5 @@ public class PredictionResult {
 	public String toString() {
 		return "PredictionResult: mapOfPredictionResult=" + mapOfPredictionResult;
 	}
-	
-	
 
 }

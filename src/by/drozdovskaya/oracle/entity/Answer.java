@@ -3,7 +3,7 @@ package by.drozdovskaya.oracle.entity;
 import java.util.List;
 
 public class Answer {
-	
+
 	private String answer;
 
 	public Answer() {
@@ -51,10 +51,5 @@ public class Answer {
 	public String toString() {
 		return "Answer: answer=" + answer;
 	}
-	
-	
-	
-	
-	
 
 }

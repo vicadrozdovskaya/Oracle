@@ -1,8 +1,7 @@
 package by.drozdovskaya.oracle.entity;
 
-
 public class Prediction {
-	
+
 	private String typeOfPrediction;
 
 	public Prediction() {
@@ -50,12 +49,5 @@ public class Prediction {
 	public String toString() {
 		return "Prediction: typeOfPrediction=" + typeOfPrediction;
 	}
-	
-	
-	
-	
-	
-
-	
 
 }

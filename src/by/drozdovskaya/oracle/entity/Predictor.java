@@ -51,12 +51,14 @@ public class Predictor {
 	public void showPredictions() {
 
 		Set<Prediction> predictions = mapOfAnswers.keySet();
+		int i = 0;
 		for (Prediction p : predictions) {
-			System.out.println(p);
+			System.out.println(i + 1 + " " + p);
 		}
 
 	}
-	
+
+	// получение конкретного типа предсказания по выбору клиента
 	public Prediction getPrediction(int choice) {
 
 		Set<Prediction> predictions = mapOfAnswers.keySet();
@@ -64,14 +66,14 @@ public class Predictor {
 		Prediction pr = new Prediction();
 		int count = 0;
 		while (it.hasNext()) {
-			
-			if (count+1 == choice) {
+
+			if (count + 1 == choice) {
 				pr = it.next();
-			}else {
+			} else {
 				it.next();
 				count++;
 			}
-			
+
 		}
 		return pr;
 
@@ -82,15 +84,18 @@ public class Predictor {
 	public Answer getAnswerOfPrediction(Prediction prediction) {
 
 		return mapOfAnswers.get(prediction).poll();
-		
+
 	}
 
+	// добавление клиентов в очередь
 	public void addClientToQueue(Client client) {
-		setCountId(countId+1);
+		setCountId(countId + 1);
 		client.setIdInQueue(countId);
 		this.queueOfClients.add(client);
 	}
 
+	// метод, который вызывается для клиента, который хочет получить магическую
+	// услугу
 	public Answer wantPrediction(Prediction pr, Client client) throws ClientInQueueException {
 		if (this.queueOfClients.peek().equals(client)) {
 			if (!checkClientVisitsForWeek(client, client.getLastVisitDate())) {
@@ -98,31 +103,30 @@ public class Predictor {
 					this.mapTimeClients.put(client.getLastVisitDate(), this.queueOfClients.poll());
 					return getAnswerOfPrediction(pr);
 				} else
-					
-						throw new ClientInQueueException("Превышен лимит обращений в день");
-					
+
+					throw new ClientInQueueException("Превышен лимит обращений в день");
+
 			} else
-				
-					throw new ClientInQueueException("Превышен лимит обращений в неделю");
-				
-		}
-		else {
+
+				throw new ClientInQueueException("Превышен лимит обращений в неделю");
+
+		} else {
 			throw new ClientInQueueException("Не ваша очередь");
 		}
-			
-		
+
 	}
 
+	// проверка на возможность дать предсказание клиенту (не более 10 в день)
 	public boolean checkClientLimitInQueue(Date date) {
 
 		Set<Date> dates = mapTimeClients.keySet();
 		int clientCounter = 0;
 		Iterator<Date> it = dates.iterator();
-		
+
 		LocalTime midnight = LocalTime.MIDNIGHT;
 		LocalDate today = LocalDate.now(ZoneId.systemDefault());
-		Date startDay = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());	
-	
+		Date startDay = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
 		System.out.println(startDay);
 
 		while (it.hasNext()) {
@@ -139,6 +143,7 @@ public class Predictor {
 
 	}
 
+	// проверка на возможность дать предсказание клиенту (не более 1 раза в неделю)
 	public boolean checkClientVisitsForWeek(Client client, Date date) {
 
 		Set<Date> dates = mapTimeClients.keySet();
@@ -167,6 +172,7 @@ public class Predictor {
 
 	}
 
+	// инициализация возможными ответами на предсказание
 	public Queue<Answer> initAnswersInQueue(Prediction type) {
 		WorkWithFile f = new WorkWithFile();
 		Queue<Answer> answers = new LinkedList<>();
@@ -184,13 +190,14 @@ public class Predictor {
 	}
 
 	public void initMapOfAnswers() {
-		
+
 		mapOfAnswers.put(new Prediction("Love"), this.initAnswersInQueue(new Prediction("Love")));
 		mapOfAnswers.put(new Prediction("Life"), this.initAnswersInQueue(new Prediction("Life")));
 		mapOfAnswers.put(new Prediction("Bussiness"), this.initAnswersInQueue(new Prediction("Bussiness")));
 
 	}
 
+	// инициализация очереди клиентов
 	public void initClientsInQueue() {
 		addClientToQueue((new Client("Vica")));
 		addClientToQueue((new Client("Igor")));
@@ -203,6 +210,7 @@ public class Predictor {
 		addClientToQueue((new Client("Lena")));
 	}
 
+	// просмотр клиентов, которые получали ранее услуги
 	public void showMapTimeClient() {
 		Set<Date> dates = this.mapTimeClients.keySet();
 		for (Date d : dates) {
@@ -210,30 +218,30 @@ public class Predictor {
 		}
 	}
 
+	// просмотр очереди клиентов
 	public void showQueueClients() {
 		System.out.println("Queue of Clients");
 		Iterator<Client> it = this.queueOfClients.iterator();
-		int i = 0;
+
 		while (it.hasNext()) {
 			Client client = (Client) it.next();
 			System.out.println("id client in queue = " + client.getIdInQueue() + "  " + client.getName());
-			i++;
+
 		}
 	}
 
+	// удаление клиента из очереди
 	public void deleteClientFromQueue(int idclient) {
 		Iterator<Client> it = this.queueOfClients.iterator();
 		Client deleteClient = new Client();
 		while (it.hasNext()) {
-			Client clientIt = (Client)it.next();
+			Client clientIt = (Client) it.next();
 			if (clientIt.getIdInQueue() == idclient) {
 				deleteClient = clientIt;
 
 			}
 		}
 		this.queueOfClients.remove(deleteClient);
-		}
-
-	
+	}
 
 }

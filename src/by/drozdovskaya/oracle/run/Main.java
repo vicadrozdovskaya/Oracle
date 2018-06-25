@@ -51,31 +51,28 @@ public class Main {
 				client.setName(name);
 				client.setLastVisitDate(new Date());
 				predictor.addClientToQueue(client);
-				try
-				{
+				try {
 					Answer answer = predictor.wantPrediction(prediction, client);
 
 					predictionResult.setPredictionResult(prediction, answer);
 
 					client.setHistoryOfPredictiond(date, predictionResult);
 					client.showHistoryOfPredictions();
-				}catch(ClientInQueueException e)
-				{
+				} catch (ClientInQueueException e) {
 					System.out.println(e.getMessage());
 				}
-				
-				
+
 				menu.contineu();
-			break;
+				break;
 			case 3:
-			
-				System.out.println("отчет о данных клиентах, которым оказывалась магическая помощь " );
+
+				System.out.println("отчет о данных клиентах, которым оказывалась магическая помощь ");
 				predictor.showMapTimeClient();
 				menu.contineu();
-				
-			break;
+
+				break;
 			case 4:
-				
+
 				System.out.println("списка клиентов, записанных в очередь на приём ");
 				predictor.showQueueClients();
 				menu.contineu();
@@ -90,10 +87,8 @@ public class Main {
 				menu.exit();
 
 			}
-		}while(true);
+		} while (true);
 
-
-
-}
+	}
 
 }

@@ -45,7 +45,7 @@ public class Client implements Comparable<Client> {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getIdInQueue() {
 		return idInQueue;
 	}
@@ -66,8 +66,6 @@ public class Client implements Comparable<Client> {
 		System.out.println("HistoryOf Predictions");
 		System.out.println(historyOfPredictions);
 	}
-
-	
 
 	@Override
 	public int hashCode() {
@@ -111,8 +109,8 @@ public class Client implements Comparable<Client> {
 
 	@Override
 	public String toString() {
-		return "Client: name=" + name + ", idInQueue=" + idInQueue  + ", lastVisitDate=" + lastVisitDate + ", historyOfPredictions="
-				+ historyOfPredictions;
+		return "Client: name=" + name + ", idInQueue=" + idInQueue + ", lastVisitDate=" + lastVisitDate
+				+ ", historyOfPredictions=" + historyOfPredictions;
 	}
 
 	@Override
