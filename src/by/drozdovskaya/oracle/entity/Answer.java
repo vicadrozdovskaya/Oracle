@@ -7,7 +7,7 @@ public class Answer {
 	private String answer;
 
 	public Answer() {
-
+		this.answer = null;
 	}
 
 	public Answer(String answer) {

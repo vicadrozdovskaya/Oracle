@@ -1,6 +1,5 @@
 package by.drozdovskaya.oracle.entity;
 
-import java.util.List;
 
 public class Prediction {
 	
